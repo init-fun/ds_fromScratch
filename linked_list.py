@@ -254,6 +254,8 @@ class linkedList:
         second_half = self.divide_into_half(unsorted_list)
         # got the pointer to the other half of the list
         # now merge them together
+        first_half = self.main_merge_fun(first_half)
+        second_half = self.main_merge_fun(second_half)
         sorted_list = self.merge_two_in_one(first_half, second_half)
         # let's write the merge_two_in_one function from scratch
         return sorted_list
