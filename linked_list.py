@@ -313,15 +313,15 @@ class linkedList:
             return False
 
         cnode = self.start
-        prev_node = self.start
+        
         while cnode.next is not None:
             if cnode.data == ele:
-                cycle_pos = prev_node
+                cyclic_node = cnode
             cnode = cnode.next
-            prev_node = prev_node.next
+            
 
-        cnode.next = cycle_pos
-        print("Cycle inserted")
+        cnode.next = cyclic_node
+        print(f"Cycle inserted at {ele}")
 
         
     
