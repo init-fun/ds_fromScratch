@@ -303,107 +303,128 @@ class linkedList:
             new_list.next = new_node
             new_list = new_list.next
         return very_first_node_new
+    #end of merge sort
 
-    #end of merger sort
-
-    #find cycle in a linked list
-    def has_cycle(self):
+# finding a cycle
+#removing a cycle
+    
+    def insert_cycle_at(self,ele):
         if self.start is None or self.start.next is None:
             return False
+
         cnode = self.start
+        prev_node = self.start
+        while cnode.next is not None:
+            if cnode.data == ele:
+                cycle_pos = prev_node
+            cnode = cnode.next
+            prev_node = prev_node.next
 
+        cnode.next = cycle_pos
+        print("Cycle inserted")
 
-def general_fun():
         
-    myLinkedList = linkedList()
-    unsorted_list = linkedList()
-    # insert at begining
-    print('Insert at begining')
-    myLinkedList.insert_at_begining(50)
-    myLinkedList.insert_at_begining(60)
-
-    myLinkedList.insert_at_begining(70)
-    myLinkedList.insert_at_begining(80)
-    myLinkedList.traverse()
-
-    # for sorting purpose
-
-    unsorted_list.insert_at_begining(50)
-    unsorted_list.insert_at_begining(60)
-    unsorted_list.insert_at_begining(70)
-    unsorted_list.insert_at_begining(80)
-
-
-    print("------------")
-    # insert at end
-    print('Insert at end')
-    myLinkedList.insert_at_end(1000)
-    myLinkedList.insert_at_end(1001)
-    myLinkedList.traverse()
-
-    print("------------")
-    # insert after
-    print("insert after")
-    #in the middle of the linkedlist
-    myLinkedList.insert_after(50, 999)
-    #insert at the first element
-    myLinkedList.insert_after(80, 81)
-    #insert after the last element
-    myLinkedList.insert_after(1001, 1002)
-    myLinkedList.traverse()
-
-
-    print("------------")
-    # insert before
-    print("insert before")
-    #in the middle of the linkedlist
-    myLinkedList.insert_before(999, 998)
-    # myLinkedList.traverse()
-    #insert before first element
-    # myLinkedList.insert_before(80, 79)
-    # myLinkedList.traverse()
-    # insert before the last element
-    myLinkedList.insert_before(1001, 1000.5)
-    myLinkedList.traverse()
-
-    # deleting a node 
-    print("-------------")
-    print("Delete")
-    myLinkedList.delete_firstnode()
-    # myLinkedList.traverse()
-    myLinkedList.delete_lastnode()
-    # myLinkedList.traverse()
-    myLinkedList.delete_midnode(50)
-    # myLinkedList.traverse()
-    myLinkedList.delete_midnode(81)
-    # myLinkedList.traverse()
-    myLinkedList.delete_midnode(1002)
-    myLinkedList.traverse()
-
-    print("-------------")
-    print("Sort the list")
-    unsorted_list.traverse()
-    print("-------------")
-    unsorted_list.bubble_sort_data()
-    unsorted_list.traverse()
-    print("-------------")
-    # print("Reversing the list")
-    # myLinkedList.traverse()
-    print("-------mergin-----")
-    first_list = myLinkedList
-    second_list = unsorted_list
-    first_list.traverse()
-    second_list.traverse()
-    print("------------")
-
-    new_list = first_list.merge_it(second_list)
-    # new_list.traverse()
-
-    print(f"Current State: \n{new_list}")
-    new_list.merge_sort()
-    print("------------")
-    print(new_list)
-general_fun()
-
+    
     
 
+
+
+myLinkedList = linkedList()
+unsorted_list = linkedList()
+# insert at begining
+print('Insert at begining')
+print("Insert 50")
+myLinkedList.insert_at_begining(50)
+print("Insert 60")
+myLinkedList.insert_at_begining(60)
+print("Insert 70")
+myLinkedList.insert_at_begining(70)
+print("Insert 80")
+myLinkedList.insert_at_begining(80)
+myLinkedList.traverse()
+print("------------")
+
+# for sorting purpose
+unsorted_list.insert_at_begining(50)
+unsorted_list.insert_at_begining(60)
+unsorted_list.insert_at_begining(70)
+unsorted_list.insert_at_begining(80)
+
+
+# insert at end
+print('Insert at end')
+print("Insert 1000")
+myLinkedList.insert_at_end(1000)
+print("Insert 1001")
+myLinkedList.insert_at_end(1001)
+myLinkedList.traverse()
+
+print("------------")
+# insert after
+print("insert after")
+#in the middle of the linkedlist
+print("Insert after 50, 999")
+
+myLinkedList.insert_after(50, 999)
+#insert at the first element
+print("Insert after 80, 81")
+myLinkedList.insert_after(80, 81)
+#insert after the last element
+print("Insert after 1001, 1002")
+myLinkedList.insert_after(1001, 1002)
+myLinkedList.traverse()
+
+
+print("------------")
+# insert before
+print("insert before")
+#in the middle of the linkedlist
+print("Insert before 999,998")
+myLinkedList.insert_before(999, 998)
+print("Insert before 1001,1000.5")
+myLinkedList.insert_before(1001, 1000.5)
+myLinkedList.traverse()
+
+# deleting a node 
+print("-------------")
+print("Delete node")
+print("Delete the very first node")
+myLinkedList.delete_firstnode()
+# myLinkedList.traverse()
+print("Delete the very last node")
+myLinkedList.delete_lastnode()
+# myLinkedList.traverse()
+print("Del node 50")
+myLinkedList.delete_midnode(50)
+# myLinkedList.traverse()
+print("Del node 81")
+myLinkedList.delete_midnode(81)
+# myLinkedList.traverse()
+print("Del node 1002")
+myLinkedList.delete_midnode(1002)
+myLinkedList.traverse()
+
+print("-------------")
+print("Sort the list")
+unsorted_list.traverse()
+unsorted_list.bubble_sort_data()
+unsorted_list.traverse()
+print("-------------")
+
+print("-------mergin-----")
+first_list = myLinkedList
+second_list = unsorted_list
+first_list.traverse()
+second_list.traverse()
+
+print("merge them together")
+new_list = first_list.merge_it(second_list)
+print(f"Current State: \n{new_list}")
+new_list.merge_sort()
+print("merge sort the list")
+print(new_list)
+print("-------------")
+
+print("INserting cycle at 998")
+new_list.insert_cycle_at(998)
+# new_list.traverse()
