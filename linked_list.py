@@ -305,26 +305,28 @@ class linkedList:
         return very_first_node_new
     #end of merge sort
 
-# finding a cycle
-#removing a cycle
+
+    #inserting a cycle into a linked list    
     
-    def insert_cycle_at(self,ele):
+    def insert_cycle_at(self, ele):
         if self.start is None or self.start.next is None:
             return False
-
-        cnode = self.start
         
+        cnode = self.start
+        prev_node = self.start
         while cnode.next is not None:
             if cnode.data == ele:
-                cyclic_node = cnode
+                insert_cycle = cnode
+                
+            prev_node = cnode
             cnode = cnode.next
-            
-
-        cnode.next = cyclic_node
-        print(f"Cycle inserted at {ele}")
-
+        if insert_cycle:
+            cnode.next = insert_cycle
+            print("Cycle inserted")
+        else:
+            print("Can't insert cycle at {ele}")
         
-    
+        
     
 
 
@@ -425,6 +427,13 @@ print("merge sort the list")
 print(new_list)
 print("-------------")
 
-print("INserting cycle at 998")
+print("INserting cycle at 555")
 new_list.insert_cycle_at(998)
-# new_list.traverse()
+new_list.traverse()
+# print(new_list.contain_cycle())
+# new_list.remove_cycle()
+
+
+
+    
+
