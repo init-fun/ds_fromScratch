@@ -320,13 +320,65 @@ class linkedList:
                 
             prev_node = cnode
             cnode = cnode.next
+        
         if insert_cycle:
             cnode.next = insert_cycle
             print("Cycle inserted")
         else:
             print("Can't insert cycle at {ele}")
         
+    def contain_cycle(self):
+        tmp = self.has_cycle()
+        if tmp:
+            print(f"\tCycle is at {tmp}")
+            return True
+        return False
+
+
+    def has_cycle(self):
+        if self.start is None or self.start.next is None:
+            return None
         
+        slow_ref = self.start
+        fast_ref = self.start
+
+        while fast_ref is not None and fast_ref.next is not None:
+            fast_ref = fast_ref.next.next
+            slow_ref = slow_ref.next
+            if fast_ref == slow_ref:
+                return slow_ref
+
+        return None
+    
+    def removing_cycle(self):
+        fixed_node = self.has_cycle()
+        counting_flag_node = self.has_cycle()
+        count = 0
+        while True:
+            count += 1
+            counting_flag_node = counting_flag_node.next
+            if fixed_node == counting_flag_node:
+                break
+
+        print(f"\tTotal nodes in the cycle are {count}")
+        first_node = self.start
+        total_len = 0
+        while first_node != fixed_node:
+            total_len += 1
+            first_node = first_node.next
+            fixed_node = fixed_node.next
+        
+        print(f"\tTotal nodes in the list is {count + total_len} ") 
+        first_node = self.start
+        for i in range(10):
+            first_node = first_node.next
+        first_node.next = None
+        print("Traversing list after removing the cycle")
+        return self.traverse()
+
+        
+
+
     
 
 
@@ -427,13 +479,10 @@ print("merge sort the list")
 print(new_list)
 print("-------------")
 
-print("INserting cycle at 555")
+print("Inserting cycle at 998")
 new_list.insert_cycle_at(998)
-new_list.traverse()
-# print(new_list.contain_cycle())
-# new_list.remove_cycle()
+# new_list.traverse()
 
-
-
-    
+new_list.contain_cycle()
+new_list.removing_cycle()
 
