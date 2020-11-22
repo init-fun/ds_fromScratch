@@ -305,7 +305,6 @@ class linkedList:
         return very_first_node_new
     #end of merge sort
 
-
     #inserting a cycle into a linked list    
     
     def insert_cycle_at(self, ele):
@@ -334,7 +333,6 @@ class linkedList:
             return True
         return False
 
-
     def has_cycle(self):
         if self.start is None or self.start.next is None:
             return None
@@ -352,6 +350,8 @@ class linkedList:
     
     def removing_cycle(self):
         fixed_node = self.has_cycle()
+        if fixed_node is None:
+            return
         counting_flag_node = self.has_cycle()
         count = 0
         while True:
@@ -361,27 +361,28 @@ class linkedList:
                 break
 
         print(f"\tTotal nodes in the cycle are {count}")
-        first_node = self.start
+        counting_flag_node = self.start
+        very_first = self.start
+        print("fist ", very_first)
         total_len = 0
-        while first_node != fixed_node:
+        while counting_flag_node != fixed_node:
             total_len += 1
-            first_node = first_node.next
+            counting_flag_node = counting_flag_node.next
             fixed_node = fixed_node.next
-        
-        print(f"\tTotal nodes in the list is {count + total_len} ") 
-        first_node = self.start
-        for i in range(10):
-            first_node = first_node.next
-        first_node.next = None
-        print("Traversing list after removing the cycle")
-        return self.traverse()
+        total_len += count
+        print(f"\tTotal nodes in the list is {total_len} ") 
 
-        
-
+        counting_flag_node = self.start
+        for i in range(total_len-1):
+            counting_flag_node = counting_flag_node.next
+        counting_flag_node.next = None
+        print("\nCycle removed")
 
     
 
+    
 
+# Test code
 
 myLinkedList = linkedList()
 unsorted_list = linkedList()
@@ -485,4 +486,5 @@ new_list.insert_cycle_at(998)
 
 new_list.contain_cycle()
 new_list.removing_cycle()
+new_list.traverse()
 
