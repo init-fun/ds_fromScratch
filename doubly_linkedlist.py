@@ -92,11 +92,21 @@ class doublyLinkedList:
     def del_very_first(self):
         if self.start is None:
             return "Nothin to delete"
+        if self.start.next is None:
+            # only Node
+            self.start = None
+            return
+
         self.start = self.start.next
+        self.start.prev = None
 
     def del_last_node(self):
         if self.start is None:
             return "Nothing to delete"
+        if self.start.next is None:
+            self.start = None
+            return
+
         cnode = self.start
         while cnode.next is not None:
             cnode = cnode.next
@@ -105,17 +115,36 @@ class doublyLinkedList:
     def delete_mid_node(self, delete_this):
         if self.start is None:
             return f"Nothing to delete"
-        cnode = self.start
+        if self.start.next is None:
+            # only node
+            if self.start.data == delete_this:
+                self.start = None
+                return
+            else:
+                return f"{delete_this} is  not present in the list"
+
+        if self.start.data == delete_this:
+            # very first node
+            self.start = self.start.next
+            self.start.prev = None
+            return
+
+        cnode = self.start.next
         while cnode.next is not None:
             if cnode.data == delete_this:
                 break
             cnode = cnode.next
 
-        if cnode is None:
-            return f"{delete_this} is not present in the list"
-        else:
-            cnode.next.prev = cnode.prev
+        if cnode.next is not None:
+            # deleting in between node
             cnode.prev.next = cnode.next
+            cnode.next.prev = cnode.prev
+        else:
+            # deletgin the last node
+            if cnode.data == delete_this:
+                cnode.prev.next = None
+            else:
+                return f"{delete_this} is not present in the list"
 
 
 my_dll = doublyLinkedList()
@@ -141,4 +170,11 @@ my_dll.del_last_node()
 print("After => ", my_dll)
 
 my_dll.delete_mid_node(40)
+print("After => ", my_dll)
+print()
+my_dll.delete_mid_node(20)
+print("After => ", my_dll)
+my_dll.delete_mid_node(80)
+print("After => ", my_dll)
+my_dll.delete_mid_node(60)
 print("After => ", my_dll)
