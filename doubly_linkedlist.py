@@ -89,7 +89,35 @@ class doublyLinkedList:
             cnode.prev.next = new_node
             cnode.prev = new_node
 
-#test code
+    def del_very_first(self):
+        if self.start is None:
+            return "Nothin to delete"
+        self.start = self.start.next
+
+    def del_last_node(self):
+        if self.start is None:
+            return "Nothing to delete"
+        cnode = self.start
+        while cnode.next is not None:
+            cnode = cnode.next
+        cnode.prev.next = None
+
+    def delete_mid_node(self, delete_this):
+        if self.start is None:
+            return f"Nothing to delete"
+        cnode = self.start
+        while cnode.next is not None:
+            if cnode.data == delete_this:
+                break
+            cnode = cnode.next
+
+        if cnode is None:
+            return f"{delete_this} is not present in the list"
+        else:
+            cnode.next.prev = cnode.prev
+            cnode.prev.next = cnode.next
+
+
 my_dll = doublyLinkedList()
 my_dll.insert_at_begining(60)
 my_dll.insert_at_begining(40)
@@ -104,4 +132,13 @@ print("After => ", my_dll)
 my_dll.insert_before(40, 30)
 print("After => ", my_dll)
 my_dll.insert_before(30, 20)
+print("After => ", my_dll)
+
+my_dll.del_very_first()
+# print("After => ", my_dll)
+
+my_dll.del_last_node()
+print("After => ", my_dll)
+
+my_dll.delete_mid_node(40)
 print("After => ", my_dll)
