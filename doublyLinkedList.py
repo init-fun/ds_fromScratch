@@ -110,6 +110,27 @@ class doublyLinkedList:
             new_node.next.prev = new_node
         return
 
+    def delete_very_first_node(self):
+        if self.start is None:
+            return f"List is empty"
+        self.start = self.start.next
+        self.start.prev = None
+        return
+
+    def delete_last_node(self):
+        if self.start is None:
+            return f"List is empty"
+        if self.start.next is None:
+            self.start = None
+            return
+
+        cnode = self.start
+        while cnode.next is not None:
+            cnode = cnode.next
+
+        cnode.next = None
+        return
+
 
 mydoublylinkedlist = doublyLinkedList()
 print(mydoublylinkedlist)
