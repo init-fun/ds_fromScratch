@@ -72,12 +72,14 @@ class doublyLinkedList:
         new_node = Node(ele)
         if cnode.data == before_this:
             return self.insert_at_begining(new_node)
+
         while cnode.next is not None:
             if cnode.next.data == before_this:
                 break
             cnode = cnode.next
         else:
             print(f"{before_this} is not present in the list")
+
         new_node.prev = cnode
         new_node.next = cnode.next
         cnode.next.prev = new_node
@@ -113,6 +115,10 @@ class doublyLinkedList:
     def delete_very_first_node(self):
         if self.start is None:
             return f"List is empty"
+        if self.start.next is None:
+            self.start = None
+            return
+
         self.start = self.start.next
         self.start.prev = None
         return
@@ -125,10 +131,36 @@ class doublyLinkedList:
             return
 
         cnode = self.start
+        while cnode.next.next is not None:
+            cnode = cnode.next
+        cnode.next = None
+        return
+
+    def delete_this_node(self, this_node):
+        # there is no node in the list
+        if self.start is None:
+            return f"List is empty"
+
+        # this is the first node and we want to delete this
+        if self.start.data == this_node and self.start.next is None:
+            self.start = None
+            return
+
+        cnode = self.start
         while cnode.next is not None:
+            if cnode.next.data == this_node:
+                break
             cnode = cnode.next
 
-        cnode.next = None
+        if cnode is None:
+            return f" {this_node} is not present in the list"
+        else:
+            if cnode.next.next is None:
+                cnode.next = None
+                return
+            next_node = cnode.next.next
+            cnode.next = next_node
+            next_node.prev = cnode.next
         return
 
 
@@ -137,6 +169,11 @@ print(mydoublylinkedlist)
 
 mydoublylinkedlist.insert_at_begining(20)
 mydoublylinkedlist.insert_at_begining(10)
+print(mydoublylinkedlist)
+
+mydoublylinkedlist.delete_this_node(20)
+print(mydoublylinkedlist)
+
 mydoublylinkedlist.insert_at_begining(0)
 print(mydoublylinkedlist)
 
@@ -154,4 +191,15 @@ print(mydoublylinkedlist)
 
 mydoublylinkedlist.insert_node_here(2, 2)
 mydoublylinkedlist.insert_node_here(3, 3)
+print(mydoublylinkedlist)
+
+mydoublylinkedlist.delete_very_first_node()
+print(mydoublylinkedlist)
+
+
+mydoublylinkedlist.delete_this_node(10)
+print(mydoublylinkedlist)
+
+
+mydoublylinkedlist.delete_last_node()
 print(mydoublylinkedlist)
