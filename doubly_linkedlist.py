@@ -163,6 +163,7 @@ class doublyLinkedList:
             next_node.next = cnode
             cnode = next_node
             next_node = next_node.prev
+        self.start = cnode
         return self.start
 
 
@@ -191,9 +192,15 @@ print("After => ", my_dll)
 my_dll.delete_mid_node(40)
 print("After => ", my_dll)
 print()
-my_dll.delete_mid_node(20)
-print("After => ", my_dll)
-my_dll.delete_mid_node(80)
-print("After => ", my_dll)
-my_dll.delete_mid_node(60)
-print("After => ", my_dll)
+# my_dll.delete_mid_node(20)
+# print("After => ", my_dll)
+# my_dll.delete_mid_node(80)
+# print("After => ", my_dll)
+# my_dll.delete_mid_node(60)
+# print("After => ", my_dll)
+
+print(my_dll)
+
+print("reversing")
+my_dll.reverse()
+print(my_dll)
