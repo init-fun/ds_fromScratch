@@ -146,6 +146,25 @@ class doublyLinkedList:
             else:
                 return f"{delete_this} is not present in the list"
 
+    def reverse(self):
+        if self.start is None:
+            return f"List is empty"
+        if self.start.next is None:
+            return self.start
+
+        cnode = self.start
+        next_node = self.start.next
+
+        cnode.next = None  # last node to be
+        cnode.prev = next_node  # adding the prev to the
+        while next_node is not None:
+
+            next_node.prev = next_node.next
+            next_node.next = cnode
+            cnode = next_node
+            next_node = next_node.prev
+        return self.start
+
 
 my_dll = doublyLinkedList()
 my_dll.insert_at_begining(60)
