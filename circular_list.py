@@ -109,7 +109,18 @@ class circularLinkedList:
         return
 
     def add_twoCircularLists(self, sec_list):
-        pass
+        if self.last_node is None and sec_list.last_node is not None:
+            return sec_list
+        elif self.last_node is not None and sec_list.last_node is None:
+            return self.last_node
+        else:
+
+            # optimal case
+            fptr = self.last_node.next
+            self.last_node.next = sec_list.last_node.next
+            sec_list.last_node.next = fptr
+            self.last_node = sec_list.last_node
+            return
 
 
 myCircular = circularLinkedList()
@@ -129,11 +140,21 @@ myCircular.insert_after(50, 60)
 print(myCircular)
 print()
 
-myCircular.delete_firstNode()
-print(myCircular)
+# myCircular.delete_firstNode()
+# print(myCircular)
 
 myCircular.delete_lastNode()
 print(myCircular)
 
 myCircular.delete_Node(40)
+print(f"First list is {myCircular}")
+
+sec_list = circularLinkedList()
+sec_list.insert_at_begining(95)
+sec_list.insert_at_begining(96)
+sec_list.insert_at_begining(97)
+sec_list.insert_at_begining(98)
+print(f"Second list is {sec_list}")
+
+myCircular.add_twoCircularLists(sec_list)
 print(myCircular)
