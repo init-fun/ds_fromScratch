@@ -1,2 +1,2 @@
 # ds_fromScratch
-Implementation of basic data structures in Python.
+My go at implementation of basic data structures in Python.
