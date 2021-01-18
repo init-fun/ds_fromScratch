@@ -46,6 +46,22 @@ class circularLinkedList:
         self.last_node.next = new_node
         self.last_node = new_node
 
+    def insert_after(self, node_ele, data):
+        if (
+            self.last_node is None or self.last_node.next == self.last_node
+        ) and pos == 0:
+            return self.insert_at_begining(Node(ele))
+
+        cnode = self.last_node.next
+        new_node = Node(data)
+
+        while cnode is not self.last_node and cnode.data != node_ele:
+            cnode = cnode.next
+        if cnode == self.last_node:
+            return "element is not present"
+        new_node.next = cnode.next
+        cnode.next = new_node
+
 
 myCircular = circularLinkedList()
 print(myCircular)
@@ -58,4 +74,7 @@ print(myCircular)
 myCircular.insert_at_the_end(100)
 myCircular.insert_at_the_end(110)
 
+print(myCircular)
+
+myCircular.insert_after(50, 60)
 print(myCircular)
