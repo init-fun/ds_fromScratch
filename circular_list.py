@@ -108,6 +108,9 @@ class circularLinkedList:
                 self.last_node = cnode
         return
 
+    def add_twoCircularLists(self, sec_list):
+        pass
+
 
 myCircular = circularLinkedList()
 print(myCircular)
